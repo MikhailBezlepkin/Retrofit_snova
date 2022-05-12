@@ -1,0 +1,36 @@
+package com.example.retrofitsnova.screense.userlist
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import com.example.retrofitsnova.R
+import com.example.retrofitsnova.UserApp
+import com.example.retrofitsnova.data.remote.user.UserApi
+
+
+class UserFragment : Fragment() {
+
+    private lateinit var viewModel: UserViewModel
+
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_user, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        viewModel.fetchUserList((activity?.application as? UserApp)?.userApi)
+    }
+
+
+}
